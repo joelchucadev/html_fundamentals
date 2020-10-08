@@ -1,0 +1,109 @@
+<html doctype>
+    <head>
+
+    </head>
+    <body>
+        <div id="example-container">
+            <img src="../../img/coded-homes-logo-sm.png"
+                     class="img-responsive" />
+            <img src="../../img/home.jpg"
+                     class="thumbnail img-responsive push-down-top" />
+            <section class="description">
+                <p class="h5">Five bedrooms, three full baths and 3,702 square feet of living space.</p>
+                <p>Extra-tall double-door entry opens to an inviting and spacious foyer. Formal living and dining rooms featuring see through fireplace.</p>
+                <p>Large gourmet kitchen with granite countertops, stainless steel appliances with double ovens. Arrow shaped center island, huge, walk in pantry and lots of cabinets for storage. Large eating area off the kitchen for the family to enjoy meals together.</p> 
+                <p>The front bedroom with full bathroom just outside the door. Huge family room with recessed entertainment area complete with recessed lighting and ceiling fan. The huge master suite features a soaker tub, large shower, walk-in closet and an additional over-sized walk-in closet. The master bath features split sinks with granite countertops. 3 large, secondary bedrooms and large bathroom that is great for kids to share.</p>
+                <p>Also includes: 3 car garage, high ceilings throughout, wired for spa in backyard, dual pane windows, new tile and carpet on bottom floor and large, upstairs laundry room. Nicely landscaped backyard with the best views in the Temescal Valley.</p>
+            </section>
+            <h2 class="h4">Features</h2>
+            <ul>
+                <li class="feature">Luxurious sized master suite</li>
+                <li class="feature">Oversized walk-in closet</li>
+                <li class="feature">Frameless Beech cabinetry with concealed hinges</li>
+                <li class="feature">Elegant slab white quartz countertops with large backsplash</li>
+                <li class="feature">Dual china sinks with Moen faucets</li>
+                <li class="feature">Clear frameless shower enclosures</li>
+            </ul>
+        </div>
+    </body>
+    <script>
+        
+        window.onload = function(){
+            // > getElementsByClassName
+            var elements = document.getElementsByClassName('img-responsive');
+            // resutl1 is a HTMLCollection of Element 
+            console.log(elements);
+            // for (let index = 0; index < elements.length; index++) {
+            //     const element = elements[index];
+            //     console.log(element);
+            // }
+
+            // > querySelector > Returns the first Element node within the document, in document order, that matches the specified selectors.
+            console.log("=== document.querySelector() ===");
+            var element = document.querySelector('.img-responsive');
+            console.log(element);
+            var element2 = document.querySelector('#example-container li:first-child');
+            console.log(element2);
+            // Null if not match
+            var element3 = document.querySelector('#anything');
+            console.log(element3);
+
+            // *** querySelectorAll > Returns a list of all the Element nodes (NodeList) within the document that match the specified selectors.
+            // Note:  
+                // * A NodeList and an HTML collection is very much the same thing.
+                // * A node list is not an array. You can loop through the node list and refer to its nodes like an array. 
+                //   However, you cannot use Array Methods, like valueOf(), push(), pop(), or join() on a node list.
+            console.log("=== document.querySelectorAll() ===");
+            var container = document.getElementById('example-container');
+            var element4 = container.querySelectorAll('.img-responsive');
+            console.log(element4);
+            // Empty NodeList[] if not match
+            var element5 = document.querySelectorAll('#anything');
+            console.log(element5);
+
+            //*** return Type
+            console.log("=== return type example ===");
+            var items = document.querySelectorAll('#example-container li');
+            console.log(items.toString());
+
+            //*** forEach Iteration Example
+            console.log("=== forEach Iteration Example ===");
+            var forEach = Array.prototype.forEach;
+            items = document.querySelectorAll('#example-container li');
+
+            forEach.call(items, function(item){
+                console.log(item.toString() + " " + item.innerText);
+            });
+
+            //*** "Live" Result Example
+            console.log("=== \"Live\" Result ===");
+            var ulElement = document.querySelector('#example-container ul');
+            var items = document.getElementsByClassName('feature'); 
+
+            console.log("items type: " + items.toString());
+            console.log("Start items length: " + items.length);
+
+            var newItem = document.createElement('LI');
+            newItem.className = 'feature';
+            newItem.innerText = 'new live feature';
+            ulElement.appendChild(newItem);
+
+            console.log("End items length: " + items.length);; // NOTE it only works with collection
+
+            //*** Static Result Example
+            console.log("=== Static Result ===");
+            var ulElement = document.querySelector('#example-container ul');
+            var items = document.querySelectorAll('#example-container li');
+
+            console.log("items type: " + items.toString());
+            console.log("Start items length: " + items.length);
+
+            var newItem = document.createElement('LI');
+            newItem.className = 'feature';
+            newItem.innerText = 'new static feature';
+            ulElement.appendChild(newItem);
+
+            console.log("End items length: " + items.length);
+        };
+    </script>    
+</html>

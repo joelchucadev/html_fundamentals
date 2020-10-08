@@ -1,0 +1,31 @@
+<canvas id="canvas" width="600" height="400"></canvas>
+
+<script> 
+    var canvas = document.getElementById('canvas');
+    var context = null;
+
+    context = canvas.getContext('2d');
+
+    context.beginPath();
+    context.arc(
+        135,
+        120,
+        120,
+        0,
+        Math.PI * 2,
+        true);
+    context.clip();
+
+    var img = new Image();
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+
+        context.lineWidth = 15;
+        context.strokeStyle = '#cccccc';
+        context.stroke();
+    }
+    img.src = '../../../img/home.jpg';
+
+
+</script>
+

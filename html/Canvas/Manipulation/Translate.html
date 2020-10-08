@@ -1,0 +1,40 @@
+<canvas id="canvas" width="800" height="600"></canvas>
+<script>
+    var
+    canvas = document.getElementById('canvas'),
+    context = null;
+
+    context = canvas.getContext('2d');
+
+    context.fillStyle = 'rgb(0,0,0)';
+    context.fillRect(300, 300,300,300 );
+
+    //* uncomment to move the base coordinates
+    context.translate(50, 50);  // NOTE rectangle is not translate
+    //*/
+
+
+    var
+        text,
+        img = new Image();
+
+    img.onload = function() {
+        context.drawImage(img, 0, 0);
+
+        context.fillStyle = '#ffffff';
+        context.strokeStyle = '#000000';
+        context.lineWidth = 6;
+
+        text = 'Beautiful Homes';
+        context.font = '3em Arial';
+        context.strokeText(text, 100, 55);
+        context.fillText(text, 100, 55);
+
+        text = 'In Your Area';
+        context.font = '2em Arial';
+        context.strokeText(text, 175, 320);
+        context.fillText(text, 175, 320);
+    }
+    img.src = '../img/home.jpg';  
+
+</script>

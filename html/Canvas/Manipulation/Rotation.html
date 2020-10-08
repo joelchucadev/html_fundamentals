@@ -1,0 +1,27 @@
+<canvas id="canvas" width="1000" height="800"></canvas>
+<script>
+    var degreesToRadians = function(degrees) {
+        var radians = (degrees * (Math.PI / 180));
+        return radians;
+    }
+
+    var canvas = document.getElementById('canvas');
+    var context = null;
+
+    context = canvas.getContext('2d');
+
+    var img = new Image();
+    img.onload = function() {
+        context.drawImage(img, 0, 0);        
+    }
+
+    img.src = '../img/home.jpg';
+    //context.rotate(0.2);
+
+    context.fillStyle = 'rgb(0,0,0)';
+    context.fillRect(300, 300,300,300 );
+
+    context.rotate(degreesToRadians(-15)); // NOTE rectange is not ratate
+
+
+</script>
