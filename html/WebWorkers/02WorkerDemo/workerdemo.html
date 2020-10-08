@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Web Workers: Generate Fibonacci Series - With Worker
+        </title>
+        <style>
+            ol {
+                background-color: #ccc;
+                width: 20%;
+            }
+
+            ol li
+            {
+                background-color: #fff;
+                padding-left: 5px;
+                margin: 4px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <h1>Generate Fibonacci Series</h1>
+            <h2>With Workers</h2>
+            <input type="numeric" id="seriesLength" value="40">
+            <input type="button" id="generateButton" value="Generate Series">
+            <img src="../../../img/load.gif" id="loadImg">
+            <ol id="log"></ol>
+        </div>
+    </body>
+    <script src="../../../js/jquery/jquery-3.5.1.min.js"></script>
+    <script>
+       
+        var log;
+        var loadImg;
+        var worker;
+        
+
+        $(function () {
+            log = $("#log");            
+            loadImg = $("#loadImg"); 
+            loadImg.hide();
+
+            $("#generateButton").click(function () {                
+                log.html("");
+                loadImg.show(); 
+
+                var seriesLength= parseInt($("#seriesLength").val());
+
+                worker = new Worker("./fib-worker.js");                
+                worker.onmessage = messageHandler;
+                worker.onerror = errorHandler;
+                worker.postMessage(seriesLength); // send to onmessage definided on js file               
+            })
+        });
+        
+        function messageHandler(e) {
+            var results = e.data;
+            $.each(results, function() {
+                logMsg(this);                
+            })
+            loadImg.hide();
+        }
+        
+        function errorHandler(e) {
+            logMsg(e.message);
+        }
+
+        function logMsg(msg) {
+            log.append("<li>" + msg + "</li>");
+        }
+
+    </script>
+</html>

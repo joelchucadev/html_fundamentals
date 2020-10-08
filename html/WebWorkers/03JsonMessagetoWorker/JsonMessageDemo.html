@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Web Workers: Posting Json Messages to Web Workers
+        </title>
+
+    </head>
+
+    <body>
+        <div id="container">
+            <h1>Posting JSON Messages to Web Workers</h1>
+            <h2>Result: <span id="result"></span></h2>
+            
+            <input type="button" id="postButton" value="Post Message" title="worker.postMessage('hello')">
+            <ul id="log"></ul>
+        </div>
+    </body>
+    <script src="../../../js/jquery/jquery-3.5.1.min.js"></script>
+    <script>
+       
+        var result, log, worker;
+        var arg = { Command: "", Message: "", Value: 0};
+
+        $(function () {
+            log = $("#log");            
+            result = $("#result"); 
+
+            $("#postButton").click(function () {                
+                worker = new Worker("json-worker.js");                
+                worker.onmessage = messageHandler;
+                worker.onerror = errorHandler;
+                arg.Command = "start";
+                arg.Value = Math.floor(Math.random() * 100);
+                worker.postMessage(arg); 
+                logMsg("Posting JSON message to worker thread");             
+            });
+        });
+        
+        function messageHandler(e) {
+           result.text(e.data.Message);
+           console.log(arg); // NOTE: original arg is not modified by worker. Other arg copy is returned with modifications.
+        }
+        
+        function errorHandler(e) {
+            logMsg(e.message);
+        }
+
+        function logMsg(msg) {
+            log.append("<li>" + msg + "</li>");
+        }
+
+    </script>
+</html>
